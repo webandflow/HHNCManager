@@ -1,0 +1,58 @@
+// HHNCMANGER Changelog
+-----------------------
+version 0.5.1
+=============
+- Edited snippet.hhncNextSeasonCountdown.php to correctly display "No New Season Scheduled" when no future season in DB
+- Added hhncUserNotComingSoon chunk to display "No New Season" information
+
+version 0.5.0
+=============
+- new feature: zip code filtering for enrollment eligibility
+- minor improvements and fixes
+
+version 0.3.8
+=============
+- changed text display on "my weekly selections" (removed parens)
+
+version 0.3.7
+=============
+- added categories to a la carte items to interact with FoxyCart
+- added template variable availableALaCarte
+- edited hhncUserALaCarte to include category and display items indicated by availableALaCarte
+
+version 0.3.5
+=============
+- added new class "produceprocessor"
+- added several supporting chunks for displaying various content
+- added new snippet (snippet.hhncGetGrowingNow.php) for the in-season page
+- various bug fixes
+
+version 0.3.1
+=============
+- added links to order viewer page for users without custom ordering
+- various bug fixes and content changes
+
+version 0.3.0
+=============
+- added snippet.hhncAdminMemberOrderViewer.php to view individual members orders by week
+- added displayOrderArrayAsList() method to class.hhncManager.php
+- various css edits/tweaks related to above additions
+- added related snippets to MODX
+
+version 0.2.8
+=============
+- commented out addressing checking code in 'snippet.hhncUserHomepage.php' and 'snippet.hhncUserThisWeek.php' to remove address checking functionality
+- added section headers to custom ordering form in 'snippet.hhncUserCustmizeOrder.php'
+- added images to produce items in 'snippet.hhncUserCustomizeOrder.php'
+- edited class.seasonprocessor.php, getNextWeek() to accurately grab the next season information if in the last week of a season
+
+version 0.2.6
+=============
+- Edits to In Season page and addition of hhncProduceInSeason snippet
+- Revised NextSeasonCountdown to include links to enroll/notice that enrollment is closed
+- Various bug fixes
+
+version 0.2.5
+==============
+- Began Tracking Changes
+- Removed "Default Basket" Functionality.  Orders now default to "classic basket"

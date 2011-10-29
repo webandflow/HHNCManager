@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model package="hhncmanager" baseClass="xPDOObject" platform="mysql" defaultEngine="MyISAM" version="1.1">
+	<object class="Addresses" table="addresses" extends="xPDOSimpleObject">
+		<field key="name" dbtype="varchar" precision="128" phptype="string" null="false" index="index" />
+		<field key="st1" dbtype="varchar" precision="128" phptype="string" null="false" index="index" />
+		<field key="st2" dbtype="varchar" precision="128" phptype="string" null="false" index="index" />
+		<field key="city" dbtype="varchar" precision="128" phptype="string" null="false" index="index" />
+		<field key="st" dbtype="varchar" precision="2" phptype="string" null="false" index="index" />
+		<field key="zip" dbtype="varchar" precision="10" phptype="string" null="false" index="index" />
+		<field key="useraddress" dbtype="tinyint" precision="1" phptype="integer" null="false" index="index" />
+		<field key="addedby" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" index="index" />
+		<field key="addedon" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
+		<field key="active" dbtype="tinyint" precision="1" phptype="integer" null="false" index="index" />
+
+		<index alias="dropoff" name="dropoff" primary="false" unique="false" type="BTREE" >
+			<column key="useraddress" length="" collation="A" null="false" />
+		</index>
+		<index alias="addedby" name="addedby" primary="false" unique="false" type="BTREE" >
+			<column key="addedby" length="" collation="A" null="false" />
+		</index>
+		<index alias="addedon" name="addedon" primary="false" unique="false" type="BTREE" >
+			<column key="addedon" length="" collation="A" null="false" />
+		</index>
+		<index alias="active" name="active" primary="false" unique="false" type="BTREE" >
+			<column key="active" length="" collation="A" null="false" />
+		</index>
+		<index alias="name" name="name" primary="false" unique="false" type="FULLTEXT" >
+			<column key="name" length="" collation="" null="false" />
+		</index>
+		<index alias="st1" name="st1" primary="false" unique="false" type="FULLTEXT" >
+			<column key="st1" length="" collation="" null="false" />
+		</index>
+		<index alias="st2" name="st2" primary="false" unique="false" type="FULLTEXT" >
+			<column key="st2" length="" collation="" null="false" />
+		</index>
+		<index alias="city" name="city" primary="false" unique="false" type="FULLTEXT" >
+			<column key="city" length="" collation="" null="false" />
+		</index>
+		<index alias="st" name="st" primary="false" unique="false" type="FULLTEXT" >
+			<column key="st" length="" collation="" null="false" />
+		</index>
+		<index alias="zip" name="zip" primary="false" unique="false" type="FULLTEXT" >
+			<column key="zip" length="" collation="" null="false" />
+		</index>
+		
+		<aggregate alias="DefaultAddress" class="DefaultAddresses" foreign="addressid" local="id" cardinality="many" owner="local" />
+		<aggregate alias="Order" class="Orders" local="id" foreign="addressid" cardinality="many" owner="foreign" />
+		
+	</object>
+	<object class="Catalog" table="catalog" extends="xPDOSimpleObject">
+		<field key="seasonid" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" index="index" />
+		<field key="week" dbtype="int" precision="2" attributes="unsigned" phptype="integer" null="false" index="index" />
+		<field key="productid" dbtype="int" precision="10" phptype="integer" null="false" index="index" />
+		<field key="available" dbtype="tinyint" precision="1" phptype="integer" null="false" index="index" />
+		<field key="publishedby" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" index="index" />
+		<field key="publishedon" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
+
+		<index alias="seasonid" name="seasonid" primary="false" unique="false" type="BTREE" >
+			<column key="seasonid" length="" collation="A" null="false" />
+		</index>
+		<index alias="week" name="week" primary="false" unique="false" type="BTREE" >
+			<column key="week" length="" collation="A" null="false" />
+		</index>
+		<index alias="publishedby" name="publishedby" primary="false" unique="false" type="BTREE" >
+			<column key="publishedby" length="" collation="A" null="false" />
+		</index>
+		<index alias="publishedon" name="publishedon" primary="false" unique="false" type="BTREE" >
+			<column key="publishedon" length="" collation="A" null="false" />
+		</index>
+		<index alias="productid" name="productid" primary="false" unique="false" type="BTREE" >
+			<column key="productid" length="" collation="A" null="false" />
+		</index>
+		<index alias="available" name="available" primary="false" unique="false" type="BTREE" >
+			<column key="available" length="" collation="A" null="false" />
+		</index>
+		
+		<aggregate alias="CatSeason" class="Seasons" foreign="id" local="seasonid" cardinality="one" owner="foreign" />
+		
+	</object>
+	<object class="DefaultAddresses" table="default_addresses" extends="xPDOSimpleObject">
+		<field key="userid" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" index="index" />
+		<field key="addressid" dbtype="int" precision="10" phptype="integer" null="false" index="index" />
+		<field key="type" dbtype="varchar" precision="2" phptype="string" null="false" index="index" />
+		<field key="timestamp" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
+
+		<index alias="userid" name="userid" primary="false" unique="false" type="BTREE" >
+			<column key="userid" length="" collation="A" null="false" />
+		</index>
+		<index alias="addressid" name="addressid" primary="false" unique="false" type="BTREE" >
+			<column key="addressid" length="" collation="A" null="false" />
+		</index>
+		<index alias="type" name="type" primary="false" unique="false" type="BTREE" >
+			<column key="type" length="" collation="A" null="false" />
+		</index>
+		<index alias="timestamp" name="timestamp" primary="false" unique="false" type="BTREE" >
+			<column key="timestamp" length="" collation="A" null="false" />
+		</index>
+		
+		<aggregate alias="UserAddresses" class="Addresses" foreign="id" local="addressid" cardinality="one" owner="foreign" />
+		
+	</object>
+	<object class="FoxyCartResponses" table="foxy_cart_responses" extends="xPDOSimpleObject">
+		<field key="time" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" index="index" />
+		<field key="data" dbtype="longtext" phptype="string" null="false" />
+
+		<index alias="time" name="time" primary="false" unique="false" type="BTREE" >
+			<column key="time" length="" collation="A" null="false" />
+		</index>
+	</object>
+	<object class="Membershiplevels" table="membershiplevels" extends="xPDOSimpleObject">
+		<field key="level_number" dbtype="int" precision="5" phptype="integer" null="false" index="index" />
+		<field key="level_name" dbtype="varchar" precision="128" phptype="string" null="false" index="index" />
+		<field key="level_points" dbtype="int" precision="5" phptype="integer" null="false" index="index" />
+		<field key="level_price" dbtype="double" phptype="float" null="false" index="index" />
+		<field key="custom_order" dbtype="tinyint" precision="1" phptype="integer" null="false" index="index" />
+		<field key="alacarte" dbtype="tinyint" precision="1" phptype="integer" null="false" index="index" />
+		<field key="homedelivery" dbtype="tinyint" precision="1" phptype="integer" null="false" index="index" />
+
+		<index alias="level_number" name="level_number" primary="false" unique="false" type="BTREE" >
+			<column key="level_number" length="" collation="A" null="false" />
+		</index>
+		<index alias="level_points" name="level_points" primary="false" unique="false" type="BTREE" >
+			<column key="level_points" length="" collation="A" null="false" />
+		</index>
+		<index alias="custom_order" name="custom_order" primary="false" unique="false" type="BTREE" >
+			<column key="custom_order" length="" collation="A" null="false" />
+		</index>
+		<index alias="alacart" name="alacart" primary="false" unique="false" type="BTREE" >
+			<column key="alacarte" length="" collation="A" null="false" />
+		</index>
+		<index alias="homedelivery" name="homedelivery" primary="false" unique="false" type="BTREE" >
+			<column key="homedelivery" length="" collation="A" null="false" />
+		</index>
+		<index alias="level_price" name="level_price" primary="false" unique="false" type="BTREE" >
+			<column key="level_price" length="" collation="A" null="false" />
+		</index>
+		<index alias="level_name" name="level_name" primary="false" unique="false" type="FULLTEXT" >
+			<column key="level_name" length="" collation="" null="false" />
+		</index>
+		
+		<aggregate alias="Mem" class="Memberships" local="level_number" foreign="membership_status" cardinality="many" owner="local" />
+		<aggregate alias="PointLevel" class="PointLevels" foreign="id" local="level_points" cardinality="one" owner="foreign" />
+		
+	</object>
+	<object class="Memberships" table="memberships" extends="xPDOSimpleObject">
+		<field key="modx_user_id" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
+		<field key="seasonid" dbtype="int" precision="10" phptype="integer" null="false" index="index" />
+		<field key="membership_status" dbtype="int" precision="2" phptype="integer" null="false" index="index" />
+		<field key="membership_verified" dbtype="int" precision="11" phptype="integer" null="false" index="index" />
+		<field key="can_alacarte" dbtype="tinyint" precision="1" phptype="integer" null="false" index="index" />
+		<field key="can_customorder" dbtype="tinyint" precision="1" phptype="integer" null="false" index="index" />
+		<field key="can_homedeliver" dbtype="tinyint" precision="1" phptype="integer" null="false" index="index" />
+		<field key="manual_override" dbtype="tinyint" precision="1" phptype="integer" null="false" index="index" />
+
+		<index alias="modx_user_id" name="modx_user_id" primary="false" unique="false" type="BTREE" >
+			<column key="modx_user_id" length="" collation="A" null="false" />
+		</index>
+		<index alias="membership_status" name="membership_status" primary="false" unique="false" type="BTREE" >
+			<column key="membership_status" length="" collation="A" null="false" />
+		</index>
+		<index alias="seasonid" name="seasonid" primary="false" unique="false" type="BTREE" >
+			<column key="seasonid" length="" collation="A" null="false" />
+		</index>
+		<index alias="can_alacarte" name="can_alacarte" primary="false" unique="false" type="BTREE" >
+			<column key="can_alacarte" length="" collation="A" null="false" />
+		</index>
+		<index alias="can_customorder" name="can_customorder" primary="false" unique="false" type="BTREE" >
+			<column key="can_customorder" length="" collation="A" null="false" />
+		</index>
+		<index alias="can_homedeliver" name="can_homedeliver" primary="false" unique="false" type="BTREE" >
+			<column key="can_homedeliver" length="" collation="A" null="false" />
+		</index>
+		<index alias="manual_override" name="manual_override" primary="false" unique="false" type="BTREE" >
+			<column key="manual_override" length="" collation="A" null="false" />
+		</index>
+		<index alias="membership_verified" name="membership_verified" primary="false" unique="false" type="BTREE" >
+			<column key="membership_verified" length="" collation="A" null="false" />
+		</index>
+		
+		<aggregate alias="Level" class="Membershiplevels" foreign="level_number" local="membership_status" cardinality="one" owner="foreign" />
+		<aggregate alias="Season" class="Seasons" foreign="id" local="seasonid" cardinality="one" owner="foreign" />
+		
+	</object>
+	<object class="Orders" table="orders" extends="xPDOSimpleObject">
+		<field key="modx_user_id" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" index="index" />
+		<field key="seasonid" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" />
+		<field key="week" dbtype="int" precision="4" attributes="unsigned" phptype="integer" null="false" />
+		<field key="data" dbtype="text" phptype="string" null="false" />
+		<field key="is_alacarte" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+		<field key="is_homedeliver" dbtype="tinyint" precision="1" phptype="integer" null="false" />
+		<field key="addressid" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" />
+		<field key="time" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" />
+
+		<index alias="modx_user_id" name="modx_user_id" primary="false" unique="false" type="BTREE" >
+			<column key="modx_user_id" length="" collation="A" null="false" />
+			<column key="seasonid" length="" collation="A" null="false" />
+			<column key="week" length="" collation="A" null="false" />
+			<column key="is_alacarte" length="" collation="A" null="false" />
+			<column key="is_homedeliver" length="" collation="A" null="false" />
+			<column key="addressid" length="" collation="A" null="false" />
+			<column key="time" length="" collation="A" null="false" />
+		</index>		
+		<aggregate alias="Season" class="Seasons" foreign="id" local="seasonid" cardinality="one" owner="foreign" />
+		<aggregate alias="Address" class="Addresses" foreign="id" local="addressid" cardinality="one" owner="foreign" />
+	</object>
+	<object class="PointLevels" table="point_levels" extends="xPDOSimpleObject">
+		<field key="title_modifier" dbtype="varchar" precision="128" phptype="string" null="true" />
+		<field key="points" dbtype="int" precision="6" attributes="unsigned" phptype="integer" null="false" index="index" />
+
+		<index alias="points" name="points" primary="false" unique="false" type="BTREE" >
+			<column key="points" length="" collation="A" null="false" />
+		</index>
+		
+		<aggregate alias="MembershipLevel" class="MembershipLevels" foreign="level_points" local="id" cardinality="many" owner="local" />
+		
+	</object>
+	<object class="Seasons" table="seasons" extends="xPDOSimpleObject">
+		<field key="start" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" />
+		<field key="end" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" />
+		<field key="name" dbtype="varchar" precision="128" phptype="string" null="false" />
+
+		<index alias="id" name="id" primary="false" unique="false" type="BTREE" >
+			<column key="id" length="" collation="A" null="false" />
+		</index>
+		
+		<aggregate alias="Members" class="Memberships" foreign="seasonid" local="id" cardinality="many" owner="local" />
+		<aggregate alias="DefItems" class="WeeklyDefaults" foreign="seasonid" local="id" cardinality="many" owner="local" />
+		<aggregate alias="SeasCatalog" class="Catalog" foreign="seasonid" local="id" cardinality="many" owner="local" />
+		<aggregate alias="Order" class="Orders" local="id" foreign="seasonid" cardinality="many" owner="foreign" />
+		
+	</object>
+	<object class="UserSelections" table="user_selections" extends="xPDOSimpleObject">
+		<field key="seasonid" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" index="index" />
+		<field key="week" dbtype="int" precision="2" attributes="unsigned" phptype="integer" null="false" index="index" />
+		<field key="userid" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" index="index" />
+		<field key="data" dbtype="text" phptype="string" null="false" index="index" />
+		<field key="updated" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" index="index" />
+
+		<index alias="seasonid" name="seasonid" primary="false" unique="false" type="BTREE" >
+			<column key="seasonid" length="" collation="A" null="false" />
+		</index>
+		<index alias="week" name="week" primary="false" unique="false" type="BTREE" >
+			<column key="week" length="" collation="A" null="false" />
+		</index>
+		<index alias="userid" name="userid" primary="false" unique="false" type="BTREE" >
+			<column key="userid" length="" collation="A" null="false" />
+		</index>
+		<index alias="updated" name="updated" primary="false" unique="false" type="BTREE" >
+			<column key="updated" length="" collation="A" null="false" />
+		</index>
+		<index alias="data" name="data" primary="false" unique="false" type="FULLTEXT" >
+			<column key="data" length="" collation="" null="false" />
+		</index>
+	</object>
+	<object class="WeeklyDefaults" table="weekly_defaults" extends="xPDOSimpleObject">
+		<field key="seasonid" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" index="index" />
+		<field key="week" dbtype="int" precision="2" attributes="unsigned" phptype="integer" null="false" index="index" />
+		<field key="data" dbtype="text" phptype="string" null="false" index="index" />
+		<field key="submittedby" dbtype="int" precision="10" attributes="unsigned" phptype="integer" null="false" index="index" />
+		<field key="submittedon" dbtype="int" precision="11" attributes="unsigned" phptype="integer" null="false" index="index" />
+
+		<index alias="seasonid" name="seasonid" primary="false" unique="false" type="BTREE" >
+			<column key="seasonid" length="" collation="A" null="false" />
+		</index>
+		<index alias="week" name="week" primary="false" unique="false" type="BTREE" >
+			<column key="week" length="" collation="A" null="false" />
+		</index>
+		<index alias="submittedby" name="submittedby" primary="false" unique="false" type="BTREE" >
+			<column key="submittedby" length="" collation="A" null="false" />
+		</index>
+		<index alias="submittedon" name="submittedon" primary="false" unique="false" type="BTREE" >
+			<column key="submittedon" length="" collation="A" null="false" />
+		</index>
+		<index alias="data" name="data" primary="false" unique="false" type="FULLTEXT" >
+			<column key="data" length="" collation="" null="false" />
+		</index>
+		
+		<aggregate alias="DefSeason" class="Seasons" foreign="id" local="seasonid" cardinality="one" owner="foreign" />
+		
+	</object>
+</model>

@@ -1,0 +1,13 @@
+public function getLevelDefaultSelections($s,$w,$membership_status) {
+	/*
+	   This method takes the seasonid and week arguments and the users membership status from the membership_levels db and returns the default selections for the given week and level
+	*/
+	   $memType = $this->modx->getObject('Membershiplevels',array('level_number' => $membership_status));
+	   $memLevel= $memType->get('level_points');
+	   $selections = $this->modx->getObject('WeeklyDefaults',array('seasonid' => $s,'week' => $w));
+    // get the raw default orders, we will have to process a little further with json_decode
+	   $defaults= $selections->get('data');
+	   $defAsArray = json_decode($defaults,1);
+       $defAsJson = json_encode($defAsArray['selections'][$memLevel]);       
+       return $defAsJson;
+	} // end getLevelDefaultSelections
